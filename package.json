@@ -1,0 +1,14 @@
+{
+  "name" : "shopping-checkout" ,
+  "version" : "0.0.1" ,
+  "description" : "根据数据生成购物网站的结算页面" ,
+  "preferGlobal" : true ,
+  "bin" : {
+    "checkout" : "./bin/cli.js"
+  } ,
+  "dependencies" : {
+    "consolidate" : "^0.13.1" ,
+    "dot" : "^1.0.3" ,
+    "xlsx" : "^0.8.0"
+  }
+}
