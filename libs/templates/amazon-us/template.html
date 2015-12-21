@@ -68,13 +68,13 @@
           <div class="a-column a-span9 a-spacing-top-mini">
             <div class="a-row a-spacing-none">
               <span class="order-date-invoice-item">
-                Ordered on December 10, 2015
+                Ordered on {{=it['下单日期']}}
                 <i class="a-icon a-icon-text-separator"></i>
               </span>
 
               <span class="order-date-invoice-item">
                 Order#
-                107-0811276-8487455
+                {{=it['交易单号']}}
               </span>
             </div>
           </div>
@@ -106,7 +106,7 @@
                           <div class="a-row a-spacing-micro">
                             <div class="displayAddressDiv">
                               <ul class="displayAddressUL">
-                                <li class="displayAddressLI displayAddressFullName">ESEEBFV</li>
+                                <li class="displayAddressLI displayAddressFullName">{{=it['收件人姓名']}}</li>
                                 <li class="displayAddressLI displayAddressAddressLine1">6631 NE 59TH PL</li>
                                 <li class="displayAddressLI displayAddressCityStateOrRegionPostalCode">PORTLAND, OR
                                   97218-2709
@@ -131,7 +131,7 @@
                             <div class="a-row a-spacing-mini">
                               <img alt="MasterCard" src="resources/mc._CB196106317_.gif">
                               <span>
-                                **** 9048
+                                {{=it['信用卡号']}}
                               </span>
                             </div>
 
@@ -158,7 +158,7 @@
                       </div>
                       <div class="a-column a-span4 a-text-right a-span-last">
                         <span>
-                          $233.97
+                          ${{=it['总价']}}
                         </span>
                       </div>
                     </div>
@@ -187,7 +187,7 @@
                       </div>
                       <div class="a-column a-span4 a-text-right a-span-last">
                         <span>
-                          $233.97
+                          ${{=it['总价']}}
                         </span>
                       </div>
                     </div>
@@ -216,7 +216,7 @@
                       </div>
                       <div class="a-column a-span4 a-text-right a-span-last">
                         <span class="a-text-bold">
-                          $233.97
+                          ${{=it['总价']}}
                         </span>
                       </div>
                     </div>
@@ -259,7 +259,7 @@
 
                 <div class="a-row">
                   <span class="a-size-medium a-text-bold">
-                    Delivered Monday
+                    Delivered {{=it['发货日期']}}
                   </span>
 
                   <span class="a-declarative"><a class="a-link-normal" href="#">I
@@ -293,21 +293,21 @@
                 <div class="a-fixed-right-grid-col a-col-left" style="padding-right:3.2%;*width:96.4%;float:left;">
 
                   <div class="a-row">
+                    <!-- 商品列表开始 -->
+                    {{~it.items :item:index}}
                     <div class="a-fixed-left-grid a-spacing-base">
                       <div class="a-fixed-left-grid-inner" style="padding-left:100px">
                         <div class="a-text-center a-fixed-left-grid-col a-col-left" style="width:100px;margin-left:-100px;_margin-left:-50px;float:left;">
 
                           <div class="item-view-left-col-inner">
-
                             <a class="a-link-normal" href="#">
-
-                              <img alt="" src="resources/41q9dsn4GkL._SX90_.jpg" class="yo-critical-feature" height="73" width="90">
-
+                              <img src="pictures/{{=item['图片文件名']}}" class="yo-critical-feature" height="73" width="90">
                             </a>
+                            {{? item['数量'] > 1}}
                             <span class="item-view-qty">
-                              4
+                              {{=item['数量']}}
                             </span>
-
+                            {{?}}
                           </div>
                         </div>
                         <div class="a-fixed-left-grid-col a-col-right" style="padding-left:1.5%;*width:98.1%;float:left;">
@@ -315,7 +315,7 @@
                           <div class="a-row">
 
                             <a class="a-link-normal" href="#">
-                              AquaIllumination Prime LED Light, Black
+                              {{=item['品名']}}
                             </a>
 
                           </div>
@@ -332,7 +332,7 @@
                           <div class="a-row">
 
                             <span class="a-size-small a-color-price">
-                              $198.98
+                              ${{=item['单价']}}
                             </span>
 
                           </div>
@@ -363,74 +363,8 @@
                         </div>
                       </div>
                     </div>
-
-                    <div class="a-fixed-left-grid a-spacing-none">
-                      <div class="a-fixed-left-grid-inner" style="padding-left:100px">
-                        <div class="a-text-center a-fixed-left-grid-col a-col-left" style="width:100px;margin-left:-100px;_margin-left:-50px;float:left;">
-
-                          <div class="item-view-left-col-inner">
-
-                            <a class="a-link-normal" href="#">
-
-                              <img alt="" src="resources/41gG-bhY5cL._SY90_.jpg" class="yo-critical-feature" height="90" width="90">
-
-                            </a>
-
-                          </div>
-                        </div>
-                        <div class="a-fixed-left-grid-col a-col-right" style="padding-left:1.5%;*width:98.1%;float:left;">
-
-                          <div class="a-row">
-
-                            <a class="a-link-normal" href="#">
-                              AquaIllumination Prime Tank Mount, Black
-                            </a>
-
-                          </div>
-                          <div class="a-row">
-
-                            <span class="a-size-small a-color-secondary">
-                              Sold by:
-
-                              Amazon.com LLC
-
-                            </span>
-
-                          </div>
-                          <div class="a-row">
-
-                            <span class="a-size-small a-color-price">
-                              $34.99
-                            </span>
-
-                          </div>
-                          <div class="a-row">
-
-                            <span class="a-color-secondary a-text-bold">
-                              Condition:
-                            </span>
-                            <span class="a-color-secondary">
-                              New
-                            </span>
-
-                          </div>
-                          <div class="a-row">
-
-                            <div class="a-row a-spacing-top-mini">
-
-                              <span class="a-declarative">
-                                <span class="a-button" id="a-autoid-3"><span class="a-button-inner"><span class="a-button-text" aria-hidden="true" id="a-autoid-3-announce">
-                                  Buy it Again
-                                </span></span></span>
-                              </span>
-
-                            </div>
-
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
+                    {{~}}
+                    <!-- 商品列表结束 -->
                   </div>
 
                 </div>
