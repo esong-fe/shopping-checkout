@@ -1,6 +1,6 @@
 {
   "name" : "shopping-checkout" ,
-  "version" : "0.1.0" ,
+  "version" : "0.1.1" ,
   "description" : "根据数据生成购物网站的结算页面" ,
   "preferGlobal" : true ,
   "engines" : {
@@ -26,7 +26,11 @@
     "type" : "git" ,
     "url" : "git+https://github.com/esong-fe/shopping-checkout.git"
   } ,
-  "author" : "Milk Lee <me@limingkai.cn>" ,
+  "author" : {
+    "name" : "Mica Li" ,
+    "email" : "mica.li@yi-express.com" ,
+    "url" : "http://www.limingkai.cn/"
+  } ,
   "license" : "MIT" ,
   "bugs" : {
     "url" : "https://github.com/esong-fe/shopping-checkout/issues"
