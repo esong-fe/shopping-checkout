@@ -1,115 +1,468 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>标题</title>
-    <link rel="stylesheet" href="resources/index.css" />
-    <link rel="stylesheet" href="resources/bootstrap.css" />
-</head>
-<body>
-<div class="container">
-<div class="c01">
-<div class="clearfix">
-    <p class="pull-left">Your Account<img src="resources/1111.jpg"> </p>
-    <p class="pull-left">Your Orders<img src="resources/1111.jpg"> </p>
-    <p class="pull-left z2">Order Details</p>
-</div>
-</div>
-<div class="c01">
-<h2>Order Details</h2>
-</div>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title dir="ltr">Order Details</title>
+    <link rel="stylesheet" href="resources/AmazonUI-ed27de6103b1766a0b6cea6d878c1a853d9eb8da._V2_.css">
+    <link rel="stylesheet" href="resources/YourAccountOrderHistoryCSS-b9b7bf8bb90d1a9213475aa6a673002151053a33.secure.min._V2_.css">
 
+    <style type="text/css">
+      #orderDetails {
+        width: 920px;
+        margin: 0 auto;
+      }
 
-<div class="container">
-    <div class="col-md-3 "style="padding-left: 0">
-    <p class="z3">Ordered on November.28.2015</p>
-    </div>
-    <div class="col-md-3 index-x2 z3">
-        <p>Order# 107-6137615-2282647</p>
-    </div>
- <button class="pull-right z11">View or Print invoice</button>
-</div>
+      /* Allow resizing for tablet */
+      #orderDetails.dynamic-width {
+        max-width: 920px;
+        min-width: 500px;
+        width: auto;
+      }
 
-<div class="container index-y2">
-    <div class="col-md-3 c02">
-        <p class="z4 u3">Shipping Address</p>
-        <p class="z3 u3">yandong ESGWKFC</p>
-        <p class="u3">6631NE 59TH PL</p>
-        <p class="u3">PORTLAND OREGON 97218-2709</p>
-        <p>United States</p>
-    </div>
-    <div class="col-md-4 c02">
-        <p class="z4">Payment Method</p>
-        <div>
-        <div class="z3"> <img src="resources/logo1.jpg">
-        **** 9048
+      .displayAddressUL {
+        margin: 0;
+      }
+
+      .displayAddressLI {
+        list-style: none;
+        color: #000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="a-page">
+
+      <div id="orderDetails">
+
+        <div class="a-section a-spacing-large a-spacing-top-small a-subheader a-breadcrumb">
+          <ul class="a-nostyle a-horizontal">
+            <li><span class="a-list-item">
+              <a class="a-link-normal" title="Return to Your Account" href="#">
+                Your Account
+              </a>
+            </span></li>
+            <li class="a-breadcrumb-divider">›</li>
+            <li><span class="a-list-item">
+              <a class="a-link-normal" title="Return to Your Orders" href="#">
+                Your Orders
+              </a>
+            </span></li>
+            <li class="a-breadcrumb-divider">›</li>
+            <li class="a-selected"><span class="a-list-item">
+              <span class="a-color-state">
+                Order Details
+              </span>
+            </span></li>
+          </ul>
         </div>
+        <div class="a-row a-spacing-large">
+
         </div>
-    </div>
-    <div class="col-md-2 index-x1">
-        <p class="z4 c02 u3">Order Summary</p>
-        <p class="u6">lteam(s) Subtotal:</p>
-        <p class="u7">Shipping & Handling:</p>
-        <p class="u6">Total before tax:</p>
-        <p>Estimated tax to be collected:</p>
-        <p class="z4">Grand Total:</p>
-    </div>
- <div>
 
-    <div class="pull-right">
-        <p class="z5 j1 u6">$75.95</p>
-        <p class="z5 j2 ">$0.00</p>
-        <p class="z5 u6">$75.95</p>
-        <p class="z5  j2">$0.00</p>
-        <p class="z5 u3  j3">$75.95</p>
+        <h1>
+          Order Details
+        </h1>
+
+        <div class="a-row a-spacing-base">
+          <div class="a-column a-span9 a-spacing-top-mini">
+            <div class="a-row a-spacing-none">
+              <span class="order-date-invoice-item">
+                Ordered on December 10, 2015
+                <i class="a-icon a-icon-text-separator"></i>
+              </span>
+
+              <span class="order-date-invoice-item">
+                Order#
+                107-0811276-8487455
+              </span>
+            </div>
+          </div>
+          <div class="a-column a-span3 a-text-right a-spacing-top-none hide-if-no-js a-span-last">
+            <div class="a-row a-spacing-none">
+
+              <span class="a-button" id="a-autoid-0"><span class="a-button-inner"><a href="#" class="a-button-text" role="button" id="a-autoid-0-announce">
+                View or Print invoice
+              </a></span></span>
+
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-<div class="container index-y1">
-    <p class="z6"><img src="resources/2222.jpg"> Transactions</p>
-</div>
 
-<div class="container index-y2 index-p1">
+        <div class="a-box-group a-spacing-base">
 
-    <div class="clearfix">
-        <div class="col-md-4">
+          <div class="a-box a-first">
+            <div class="a-box-inner">
+              <div class="a-fixed-right-grid">
+                <div class="a-fixed-right-grid-inner" style="padding-right:230px">
+                  <div class="a-fixed-right-grid-col a-col-left" style="padding-right:0%;*width:99.6%;float:left;">
+                    <div class="a-row">
+                      <div class="a-column a-span5">
 
-    <p class="z31 pull-left">Deilvered Dec 4,2015</p>
-     <p class="z61">I can't find it</p>
-    <p class="pull-left u3">Your package was left on the dock</p>
-    <p class="pull-left u3">The delivery was signed by: EBIZ</p>
-    </div>
-        <div class="j4">
-   <button class="pull-right index-z2 index-but z9 ">Track Package</button>
+                        <div class="a-section a-spacing-none od-shipping-address-container">
+                          <h5 class="a-spacing-micro">
+                            Shipping Address
+                          </h5>
+                          <div class="a-row a-spacing-micro">
+                            <div class="displayAddressDiv">
+                              <ul class="displayAddressUL">
+                                <li class="displayAddressLI displayAddressFullName">ESEEBFV</li>
+                                <li class="displayAddressLI displayAddressAddressLine1">6631 NE 59TH PL</li>
+                                <li class="displayAddressLI displayAddressCityStateOrRegionPostalCode">PORTLAND, OR
+                                  97218-2709
+                                </li>
+                                <li class="displayAddressLI displayAddressCountryName">United States</li>
+                              </ul>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                      <div class="a-column a-span7 a-span-last">
+                        <div class="a-section a-spacing-base">
+
+                          <div class="a-section a-spacing-none">
+                            <h5 class="a-spacing-micro">
+                              Payment Method
+                            </h5>
+
+                            <div class="a-row a-spacing-mini">
+                              <img alt="MasterCard" src="resources/mc._CB196106317_.gif">
+                              <span>
+                                **** 9048
+                              </span>
+                            </div>
+
+                          </div>
+
+                        </div>
+                        <div class="a-section a-spacing-none">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="od-subtotals" class="a-fixed-right-grid-col a-col-right" style="width:230px;margin-right:-230px;float:left;">
+
+                    <h5 class="a-spacing-micro a-text-left">
+                      Order Summary
+                    </h5>
+
+                    <div class="a-row">
+                      <div class="a-column a-span8 a-text-left">
+                        <span>
+                          Item(s) Subtotal:
+                        </span>
+                      </div>
+                      <div class="a-column a-span4 a-text-right a-span-last">
+                        <span>
+                          $233.97
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="a-row">
+                      <div class="a-column a-span8 a-text-left">
+                        <span>
+                          Shipping &amp; Handling:
+                        </span>
+                      </div>
+                      <div class="a-column a-span4 a-text-right a-span-last">
+                        <span>
+                          $0.00
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="a-row a-spacing-mini">
+                    </div>
+
+                    <div class="a-row">
+                      <div class="a-column a-span8 a-text-left">
+                        <span>
+                          Total before tax:
+                        </span>
+                      </div>
+                      <div class="a-column a-span4 a-text-right a-span-last">
+                        <span>
+                          $233.97
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="a-row">
+                      <div class="a-column a-span8 a-text-left">
+                        <span>
+                          Estimated tax to be collected:
+                        </span>
+                      </div>
+                      <div class="a-column a-span4 a-text-right a-span-last">
+                        <span>
+                          $0.00
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="a-row a-spacing-mini">
+                    </div>
+
+                    <div class="a-row">
+                      <div class="a-column a-span8 a-text-left">
+                        <span class="a-text-bold">
+                          Grand Total:
+                        </span>
+                      </div>
+                      <div class="a-column a-span4 a-text-right a-span-last">
+                        <span class="a-text-bold">
+                          $233.97
+                        </span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="a-box a-last">
+            <div class="a-box-inner">
+              <div aria-live="polite" class="a-row a-expander-container a-expander-inline-container show-if-no-js">
+                <a href="#" class="a-expander-header a-declarative a-expander-inline-header a-link-expander"><i class="a-icon a-icon-expand"></i><span class="a-expander-prompt">
+                  Transactions
+                </span></a>
+                <div aria-expanded="false" class="a-expander-content a-expander-inline-content a-expander-inner" style="display:none">
+                  <div class="a-row">
+                    <span class="a-color-secondary">
+                      Items shipped:
+                    </span>
+                    <span>
+                      December 11, 2015
+                      -
+                      MasterCard ending in 9048:
+                      $233.97
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+        <div class="a-box shipment shipment-is-delivered">
+          <div class="a-box-inner">
+            <div class="a-row shipment-top-row">
+              <div style="margin-right:220px; padding-right:20px">
+
+                <div class="a-row">
+                  <span class="a-size-medium a-text-bold">
+                    Delivered Monday
+                  </span>
+
+                  <span class="a-declarative"><a class="a-link-normal" href="#">I
+                    can't find it</a></span>
+                </div>
+                <div class="a-row">
+                  <div class="a-row">
+                    Your package was delivered.
+                  </div>
+                  <div class="a-row">
+                    The delivery was signed by: EBIZ
+
+                  </div>
+                </div>
+
+              </div>
+              <div class="actions" style="width:220px;">
+
+                <div class="a-row">
+                  <div class="a-button-stack">
+                    <span class="a-button a-button-primary track-package-button" id="a-autoid-1"><span class="a-button-inner"><a href="#" class="a-button-text" role="button" id="a-autoid-1-announce">
+                      Track package
+                    </a></span></span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="a-fixed-right-grid a-spacing-top-medium">
+              <div class="a-fixed-right-grid-inner" style="padding-right:220px">
+                <div class="a-fixed-right-grid-col a-col-left" style="padding-right:3.2%;*width:96.4%;float:left;">
+
+                  <div class="a-row">
+                    <div class="a-fixed-left-grid a-spacing-base">
+                      <div class="a-fixed-left-grid-inner" style="padding-left:100px">
+                        <div class="a-text-center a-fixed-left-grid-col a-col-left" style="width:100px;margin-left:-100px;_margin-left:-50px;float:left;">
+
+                          <div class="item-view-left-col-inner">
+
+                            <a class="a-link-normal" href="#">
+
+                              <img alt="" src="resources/41q9dsn4GkL._SX90_.jpg" class="yo-critical-feature" height="73" width="90">
+
+                            </a>
+                            <span class="item-view-qty">
+                              4
+                            </span>
+
+                          </div>
+                        </div>
+                        <div class="a-fixed-left-grid-col a-col-right" style="padding-left:1.5%;*width:98.1%;float:left;">
+
+                          <div class="a-row">
+
+                            <a class="a-link-normal" href="#">
+                              AquaIllumination Prime LED Light, Black
+                            </a>
+
+                          </div>
+                          <div class="a-row">
+
+                            <span class="a-size-small a-color-secondary">
+                              Sold by:
+
+                              Amazon.com LLC
+
+                            </span>
+
+                          </div>
+                          <div class="a-row">
+
+                            <span class="a-size-small a-color-price">
+                              $198.98
+                            </span>
+
+                          </div>
+                          <div class="a-row">
+
+                            <span class="a-color-secondary a-text-bold">
+                              Condition:
+                            </span>
+                            <span class="a-color-secondary">
+                              New
+                            </span>
+
+                          </div>
+                          <div class="a-row">
+
+                            <div class="a-row a-spacing-top-mini">
+
+                              <span class="a-declarative">
+                                <span class="a-button" id="a-autoid-2"><span class="a-button-inner"><span class="a-button-text" id="a-autoid-2-announce">
+                                  Buy it Again
+                                </span></span></span>
+                              </span>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="a-fixed-left-grid a-spacing-none">
+                      <div class="a-fixed-left-grid-inner" style="padding-left:100px">
+                        <div class="a-text-center a-fixed-left-grid-col a-col-left" style="width:100px;margin-left:-100px;_margin-left:-50px;float:left;">
+
+                          <div class="item-view-left-col-inner">
+
+                            <a class="a-link-normal" href="#">
+
+                              <img alt="" src="resources/41gG-bhY5cL._SY90_.jpg" class="yo-critical-feature" height="90" width="90">
+
+                            </a>
+
+                          </div>
+                        </div>
+                        <div class="a-fixed-left-grid-col a-col-right" style="padding-left:1.5%;*width:98.1%;float:left;">
+
+                          <div class="a-row">
+
+                            <a class="a-link-normal" href="#">
+                              AquaIllumination Prime Tank Mount, Black
+                            </a>
+
+                          </div>
+                          <div class="a-row">
+
+                            <span class="a-size-small a-color-secondary">
+                              Sold by:
+
+                              Amazon.com LLC
+
+                            </span>
+
+                          </div>
+                          <div class="a-row">
+
+                            <span class="a-size-small a-color-price">
+                              $34.99
+                            </span>
+
+                          </div>
+                          <div class="a-row">
+
+                            <span class="a-color-secondary a-text-bold">
+                              Condition:
+                            </span>
+                            <span class="a-color-secondary">
+                              New
+                            </span>
+
+                          </div>
+                          <div class="a-row">
+
+                            <div class="a-row a-spacing-top-mini">
+
+                              <span class="a-declarative">
+                                <span class="a-button" id="a-autoid-3"><span class="a-button-inner"><span class="a-button-text" aria-hidden="true" id="a-autoid-3-announce">
+                                  Buy it Again
+                                </span></span></span>
+                              </span>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="a-fixed-right-grid-col a-col-right" style="width:220px;margin-right:-220px;float:left;">
+
+                  <div class="a-row">
+                    <div class="a-button-stack">
+                      <span class="a-button a-button-normal a-spacing-mini a-button-primary" id="a-autoid-4"><span class="a-button-inner"><a id="Return-or-replace-items_1" href="#" class="a-button-text" role="button">
+                        Return or replace items
+                      </a></span></span>
+                      <span class="a-button a-button-normal a-spacing-mini" id="a-autoid-5"><span class="a-button-inner"><a id="Leave-package-feedback_1" href="#" class="a-button-text" role="button">
+                        Leave package feedback
+                      </a></span></span>
+                      <span class="a-button a-button-normal a-spacing-mini" id="a-autoid-6"><span class="a-button-inner"><a id="Write-a-product-review_1" href="#" class="a-button-text" role="button">
+                        Write a product review
+                      </a></span></span>
+                      <span class="a-declarative">
+                        <span class="a-button a-button-normal a-spacing-mini" id="a-autoid-7"><span class="a-button-inner"><a id="Archive-order_1" href="#" class="a-button-text" role="button">
+                          Archive order
+                        </a></span></span>
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="col-md-1"><img src="resources/yy2.jpg"> </div>
-    <div class="pull-left u41">
-
-        <p class="z7 u3">Mircosoft Sculpt Ergonamic Desktop (LV5 -00001)</p>
-        <p class="u3">Sold by: Amazon.com LLC</p>
-        <p class="z5 u3">$75.95</p>
-        <p><ui class="z4">Condition:</ui>
-            New</p>
-        <button class="u1">Buy it Again</button>
-    </div>
-
-    <div class="col-md-3 index-y4 pull-right">
-        <button class="pull-right index-z1 index-but z9">Return or replace items</button>
-        <button class="pull-right index-z1 index-but z0">Leave Package feedback</button>
-        <button class="pull-right index-z1 index-but z0">Write a product review</button>
-        <button class="pull-right index-but z0">Archive order</button>
-    </div>
-
-
-</div>
-
-    </div>
-
-
-
-</body>
+  </body>
 </html>
