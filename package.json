@@ -1,11 +1,18 @@
 {
   "name" : "shopping-checkout" ,
-  "version" : "0.0.1" ,
+  "version" : "0.1.0" ,
   "description" : "根据数据生成购物网站的结算页面" ,
   "preferGlobal" : true ,
   "engines" : {
     "node" : "^4.0.0"
   } ,
+  "scripts" : {
+    "render" : "cd ./examples && node ../bin/cli"
+  } ,
+  "files" : [
+    "bin" ,
+    "libs"
+  ] ,
   "bin" : {
     "checkout" : "./bin/cli.js"
   } ,
@@ -14,15 +21,15 @@
     "dot" : "^1.0.3" ,
     "fs-extra" : "^0.26.3" ,
     "xlsx" : "^0.8.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/esong-fe/shopping-checkout.git"
-  },
-  "author": "Milk Lee <me@limingkai.cn>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/esong-fe/shopping-checkout/issues"
-  },
-  "homepage": "https://github.com/esong-fe/shopping-checkout"
+  } ,
+  "repository" : {
+    "type" : "git" ,
+    "url" : "git+https://github.com/esong-fe/shopping-checkout.git"
+  } ,
+  "author" : "Milk Lee <me@limingkai.cn>" ,
+  "license" : "MIT" ,
+  "bugs" : {
+    "url" : "https://github.com/esong-fe/shopping-checkout/issues"
+  } ,
+  "homepage" : "https://github.com/esong-fe/shopping-checkout"
 }

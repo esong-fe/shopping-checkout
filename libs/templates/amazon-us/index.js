@@ -1,7 +1,7 @@
 'use strict';
 const pathResolve = require( 'path' ).resolve;
 const cons = require( 'consolidate' );
-const sheet2json = require( '../../sheet2json' );
+const parseSheet = require( '../../parseSheet' );
 
 /**
  * 每个模板的 index 文件都必须是一个函数，
@@ -14,9 +14,9 @@ const sheet2json = require( '../../sheet2json' );
  * @param {Function} onRendered(rowData:*,html:String)
  */
 module.exports = ( sheet , onRendered )=> {
-  const array = sheet2json( sheet );
   const templatePath = pathResolve( __dirname , 'template.html' );
-  array.forEach( ( rowData )=> {
+
+  parseSheet( sheet , ( rowData )=> {
     // 计算总价
     rowData[ '总价' ] = rowData.items.reduce( ( previousValue , currentItem )=> {
       return previousValue + Number( currentItem[ '单价' ] ) * Number( currentItem[ '数量' ] );
