@@ -14,5 +14,15 @@
     "dot" : "^1.0.3" ,
     "fs-extra" : "^0.26.3" ,
     "xlsx" : "^0.8.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esong-fe/shopping-checkout.git"
+  },
+  "author": "Milk Lee <me@limingkai.cn>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/esong-fe/shopping-checkout/issues"
+  },
+  "homepage": "https://github.com/esong-fe/shopping-checkout"
 }
