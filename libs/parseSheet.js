@@ -5,7 +5,7 @@ const sheetToJson = require( 'xlsx' ).utils.sheet_to_json;
  * 保存属于商品的字段
  * @type {string[]}
  */
-const itemKey = [ '图片文件名' , '品名' , '单价' , '数量' , '品牌' , '颜色' , '型号' ];
+const itemKey = [ '图片文件名' , '品名' , '单价' , '数量' , '品牌' , '颜色' , '型号' , 'SKU' ];
 
 /**
  * 逐行分析表格，每当解析完一条数据后则调用一次 onData
