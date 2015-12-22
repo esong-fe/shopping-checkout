@@ -8,6 +8,14 @@ const sheetToJson = require( 'xlsx' ).utils.sheet_to_json;
 const itemKey = [ '图片文件名' , '品名' , '单价' , '数量' , '品牌' , '颜色' , '型号' , 'SKU' ];
 
 /**
+ * 支持的信用卡类型
+ */
+const supportCardType = {
+  '万事达' : 'master' ,
+  'visa' : 'visa'
+};
+
+/**
  * 逐行分析表格，每当解析完一条数据后则调用一次 onData
  * @param sheet
  * @param {Function} onData(rowData)
@@ -47,6 +55,22 @@ module.exports = function ( sheet , onData ) {
   parseData( prevRowData ); // 最后一条分单数据
 
   function parseData( rowData ) {
+    // 信用卡类型
+    let cardTypeChinese = rowData[ '信用卡类型' ].toLowerCase();
+    let cardType;
+
+    if ( !cardTypeChinese ) {
+      console.warn( '没有声明信用卡类型，默认使用 Master' );
+      cardTypeChinese = '万事达';
+    }
+
+    cardType = supportCardType[ cardTypeChinese ];
+    if ( !cardType ) {
+      console.error( '没有找到此信用卡类型：%s，默认使用万事达。' , cardTypeChinese );
+      cardType = 'master';
+    }
+
+    rowData.cardType = cardType;
 
     // 计算总价
     rowData[ '总价' ] = rowData.items.reduce( ( previousValue , currentItem )=> {
