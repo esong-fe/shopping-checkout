@@ -56,14 +56,14 @@ module.exports = function ( sheet , onData ) {
 
   function parseData( rowData ) {
     // 信用卡类型
-    let cardTypeChinese = rowData[ '信用卡类型' ].toLowerCase();
+    let cardTypeChinese = rowData[ '信用卡类型' ];
     let cardType;
 
     if ( !cardTypeChinese ) {
       console.warn( '没有声明信用卡类型，默认使用 Master' );
       cardTypeChinese = '万事达';
     }
-
+    cardTypeChinese = cardTypeChinese.toLowerCase();
     cardType = supportCardType[ cardTypeChinese ];
     if ( !cardType ) {
       console.error( '没有找到此信用卡类型：%s，默认使用万事达。' , cardTypeChinese );
