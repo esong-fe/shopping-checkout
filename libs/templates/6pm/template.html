@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <title>Your account at 6pm.com</title>
+    <link rel="stylesheet" href="resources/main-4eb2b22e.css">
+    <link rel="stylesheet" href="resources/account-29a5777e.css">
+    <style type="text/css" media="screen">
+      a.zph:link { color: #369; text-decoration: none; }
+
+      a.zph:visited { color: #369; text-decoration: none; }
+
+      a.zph:hover { color: #369; text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="content" class="myAccount">
+        <h3 class="boxHeader">
+
+          Order Information
+
+        </h3>
+        <ul class="primaryInfo clearfix box">
+          <li>
+            <div>
+              <p>
+
+                Order Number: {{=it['交易单号']}}
+
+              </p>
+              <p>
+
+                Order Date: Jan 5, 2015 at 6:02 PM
+
+              </p>
+            </div>
+          </li>
+          <li class="ccInfo">
+            <h4>
+
+              Shipping Address
+
+            </h4>
+            <div>
+              <p>
+                {{=it['收件人姓名']}}
+              </p>
+              <p>
+                6915 NE 79th Ct.
+              </p>
+              <p></p>
+              <p>
+                Portland, OR 97218-2815
+              </p>
+              <p></p></div>
+          </li>
+          <li>
+            <h4>
+              Payment Information
+            </h4>
+            <div>
+              <p class="ccType MasterCard">
+                Ending in {{=it['信用卡号']}}
+              </p>
+              <p>
+                {{=it['信用卡姓名']}}
+              </p>
+              <p>
+                6915 NE 79th Ct.
+              </p>
+              <p></p>
+              <p>
+                Portland, OR 97218-2815
+              </p>
+              <p></p></div>
+          </li>
+        </ul>
+        <h3 class="boxHeader">
+
+          Item Information
+
+        </h3>
+        <form>
+          <div id="orderDetail" class="clearfix box crud">
+            <table cellspacing="0">
+              <thead>
+                <tr>
+                  <th class="desc">
+
+                    Your Items
+
+                  </th>
+                  <th class="status">
+                    Item Status
+                  </th>
+                  <th class="amt" colspan="2">
+                    Price
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <!--循环商品开始-->
+                {{~it.items :item:index}}
+                <tr>
+                  <td class="desc">
+                    <a class="prodImg" href="#"><img src="pictures/{{=item['图片文件名']}}"></a>
+                    <h4><a class="name" href="#">
+
+                      {{=item['品名']}}
+
+                    </a></h4>
+                    <ul class="details">
+                      <li><b>
+
+                        SKU:
+
+                      </b>
+                        8075928
+                      </li>
+                      <li><b>
+                        Brand:
+                      </b>
+                        {{=item['品牌']}}
+                      </li>
+                      <li><b>
+                        Color:
+                      </b>
+
+                        {{=item['颜色']}}
+
+                      </li>
+                      <li><b>
+                        Size:
+                      </b>
+                        {{=item['型号']}}
+                      </li>
+                      <!--<li><b>
+                        Width:
+                      </b>
+                        M (B)
+                      </li>-->
+                    </ul>
+                  </td>
+                  <td class="shipping">
+                    <h5>
+                      shipped
+                    </h5>
+                    <p>
+                      {{=it['下单日期']}}
+
+                    </p>
+                    <a class="returnHelp" href="#">
+                      Need Help With Your Return?
+
+                    </a>
+                    <p class="tracking">
+                      <a href="#">
+
+                        Track This Shipment
+
+                        <br>
+
+                        {{=it['发货日期']}}
+
+                      </a></p>
+                  </td>
+                  <td class="amt" colspan="2">
+                    ${{=item['单价']}}
+                  </td>
+                </tr>
+                {{~}}
+                <!--循环商品结束-->
+              </tbody>
+              <tfoot id="cartSummary">
+                <tr id="subtotal">
+                  <td class="sum" colspan="3">
+                    Subtotal ({{=it.items.length}} items):
+                  </td>
+                  <td class="amt">
+                    ${{=it['总价']}}
+                  </td>
+                </tr>
+                <tr id="shipping">
+                  <td class="sum" colspan="3">
+                    Shipping:
+                  </td>
+                  <td class="amt">
+                    FREE
+                  </td>
+                </tr>
+                <tr id="tax">
+                  <td class="sum" colspan="3">
+                    Collected tax:
+                  </td>
+                  <td class="amt">
+                    $0.00
+                  </td>
+                </tr>
+                <tr id="orderTotal">
+                  <td class="sum" colspan="3">
+                    Order Total:
+                  </td>
+                  <td class="amt">
+                    ${{=it['总价']}}
+                  </td>
+                </tr>
+                <tr id="total">
+                  <td class="sum" colspan="3">
+                    Total Charged:
+                  </td>
+                  <td class="amt">
+                    ${{=it['总价']}}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </form>
+        <p class="note">
+
+          Unless otherwise noted, all products are sold by 6pm.com, LLC
+
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>
