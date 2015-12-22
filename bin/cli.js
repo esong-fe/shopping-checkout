@@ -17,3 +17,7 @@ checkout( {
   xlsxName : program.filename
 } );
 
+// todo 在输入不支持的 options 时会报错，阻止这个默认行为
+// todo 输入不支持的 commands 时给出默认的 help 信息
+// todo 将 -c 设置的路径转换为绝对路径
+// todo 支持分支命令，并在没有输入分支命令时默认执行其中一个分支。可能要参考 https://github.com/tj/commander.js/issues/463
