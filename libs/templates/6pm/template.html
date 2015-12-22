@@ -61,7 +61,7 @@
               Payment Information
             </h4>
             <div>
-              <p class="ccType MasterCard">
+              <p class="ccType {{= {master:'MasterCard,visa:'Visa'}[it.cardType] }}">
                 Ending in {{=it['信用卡号']}}
               </p>
               <p>
