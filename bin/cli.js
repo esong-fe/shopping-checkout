@@ -15,9 +15,8 @@ const pathResolve = path.resolve ,
   workDir = process.cwd() , // 当前工作目录
   packageDir = path.resolve( __dirname , '../' ); // 此 npm 包在本地系统的路径，用于定位模板位置
 
-log( '小票工具 v' + pkg.version );
-log( '问题或建议请联系 ' + pkg.author.email );
-log( '\n开始运行小票工具 :)' );
+log( '小票工具 v%s' , pkg.version );
+log( '问题或建议请联系 %s' , pkg.author.email );
 
 // 记录运行数据
 let templateCount = 0 , // 寻找到了多少个模板
@@ -50,14 +49,13 @@ Promise.all( [
     log( tpn );
   } );
 
-  log( '\n正在 ' + workDir + ' 里寻找是否有匹配的模板……' );
+  log( '\n正在 %s 里寻找是否有匹配的模板……' , workDir );
 
   files.forEach( ( maybeTemplateName )=> {
     if ( templates.indexOf( maybeTemplateName ) >= 0 ) { // 如果文件夹的名字是其中一个模板的名字
       fs.stat( maybeTemplateName , ( err , stat )=> {
         if ( err ) {
-          log( '查询文件状态时出错：' );
-          log( err );
+          log( '查询文件状态时出错：' , err );
         } else if ( stat.isDirectory() ) {
           handle( maybeTemplateName );
         }
@@ -66,7 +64,7 @@ Promise.all( [
   } );
 
   function handle( templateName ) {
-    log( '找到模板：' + templateName );
+    log( '找到模板：' , templateName );
     templateCount += 1;
 
     // 复制模板所需的静态文件
@@ -75,8 +73,7 @@ Promise.all( [
       pathResolve( workDir , './' + templateName + '/resources' ) ,
       ( err )=> {
         if ( err ) {
-          log( '复制文件至目标文件夹时出错：' );
-          log( err );
+          log( '复制文件至目标文件夹时出错：' , err );
         }
       }
     );
@@ -91,10 +88,10 @@ Promise.all( [
 
       fs.writeFile( destPath , html , ( err )=> {
         if ( err ) {
-          log( '写入文件时出错：' + err );
+          log( '写入文件时出错：' , err );
         } else {
           htmlCount += 1;
-          log( '生成文件：' + destPath );
+          log( '生成文件：' , destPath );
         }
       } );
     } );
@@ -104,9 +101,9 @@ Promise.all( [
 } );
 
 process.on( 'exit' , function () {
-  log( '\n运行完毕，此次运行发现了 ' + templateCount + ' 个模板文件夹，共生成 ' + htmlCount + ' 个 html 文件。' );
+  log( '\n运行完毕，此次运行发现了 %s 个模板文件夹，共生成 %s 个 html 文件。' , templateCount , htmlCount );
 } );
 
-function log( msg ) {
-  console.log( msg );
+function log() {
+  console.log.apply( console , arguments );
 }
