@@ -79,7 +79,16 @@ Promise.all( [
     );
 
     // 读取电子表格的第一张表
-    const wb = parseXLSX( pathResolve( templateName , xlsxFilename ) );
+    let wb;
+    try {
+      wb = parseXLSX( pathResolve( templateName , xlsxFilename ) );
+    }
+    catch ( e ) {
+      console.error( '解析 %s 文件时出错：' , pathResolve( templateName , xlsxFilename ) );
+      console.error( e );
+      console.error( '将不会在 %s 里生成文件。' , templateName );
+      return;
+    }
     const firstSheet = wb.Sheets[ wb.SheetNames[ 0 ] ];
 
     const renderFunc = require( '../libs/templates/' + templateName + '/index.js' );
