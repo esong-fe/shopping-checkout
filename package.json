@@ -1,39 +1,42 @@
 {
-  "name" : "shopping-checkout" ,
-  "version" : "0.1.4" ,
-  "description" : "根据数据生成购物网站的结算页面" ,
-  "preferGlobal" : true ,
-  "engines" : {
-    "node" : "^4.0.0"
-  } ,
-  "scripts" : {
-    "render" : "cd ./examples && node ../bin/cli"
-  } ,
-  "files" : [
-    "bin" ,
+  "name": "shopping-checkout",
+  "version": "0.1.4",
+  "description": "根据数据生成购物网站的结算页面",
+  "preferGlobal": true,
+  "engines": {
+    "node": "^4.0.0"
+  },
+  "scripts": {
+    "render": "cd ./examples && node ../bin/cli"
+  },
+  "files": [
+    "bin",
     "libs"
-  ] ,
-  "bin" : {
-    "checkout" : "./bin/cli.js"
-  } ,
-  "dependencies" : {
-    "consolidate" : "^0.13.1" ,
-    "dot" : "^1.0.3" ,
-    "fs-extra" : "^0.26.3" ,
-    "xlsx" : "^0.8.0"
-  } ,
-  "repository" : {
-    "type" : "git" ,
-    "url" : "git+https://github.com/esong-fe/shopping-checkout.git"
-  } ,
-  "author" : {
-    "name" : "Mica Li" ,
-    "email" : "mica.li@yi-express.com" ,
-    "url" : "http://www.limingkai.cn/"
-  } ,
-  "license" : "MIT" ,
-  "bugs" : {
-    "url" : "https://github.com/esong-fe/shopping-checkout/issues"
-  } ,
-  "homepage" : "https://github.com/esong-fe/shopping-checkout"
+  ],
+  "bin": {
+    "checkout": "./bin/cli.js"
+  },
+  "main": "./libs/index.js",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "consolidate": "^0.13.1",
+    "dot": "^1.0.3",
+    "fs-extra": "^0.26.3",
+    "fs-promise": "^0.3.1",
+    "xlsx": "^0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esong-fe/shopping-checkout.git"
+  },
+  "author": {
+    "name": "Mica Li",
+    "email": "mica.li@yi-express.com",
+    "url": "http://www.limingkai.cn/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/esong-fe/shopping-checkout/issues"
+  },
+  "homepage": "https://github.com/esong-fe/shopping-checkout"
 }
