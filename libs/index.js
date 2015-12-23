@@ -6,6 +6,8 @@ const glob = require( 'glob' ) ,
   pathDir = path.dirname ,
   parseXLSX = require( 'xlsx' ).readFile;
 
+const renderer = require( './renderer' );
+
 const packageDir = pathResolve( __dirname , '../' ); // 此 npm 包在本地系统的路径，用于定位模板位置
 
 exports = module.exports = main;
@@ -77,17 +79,17 @@ function main( options ) {
     }
     const firstSheet = wb.Sheets[ wb.SheetNames[ 0 ] ];
 
-    const renderFunc = require( './templates/' + templateName + '/index.js' );
-    renderFunc( firstSheet , function onRendered( rowData , html ) {
-      const destPath = pathResolve( workDir , templateName + '/' + rowData[ '分单号' ] + '.html' );
-      return fsp
-        .writeFile( destPath , html )
-        .then( ()=> {
-          htmlCount += 1;
-          log( '生成文件：' , destPath );
-        } );
-    } , {
-      picturesDir
+    renderer( firstSheet , templateName , {
+      locals : { picturesDir } ,
+      onRendered : function ( rowData , html ) {
+        const destPath = pathResolve( workDir , templateName + '/' + rowData[ '分单号' ] + '.html' );
+        return fsp
+          .writeFile( destPath , html )
+          .then( ()=> {
+            htmlCount += 1;
+            log( '生成文件：' , destPath );
+          } );
+      }
     } );
   }
 
