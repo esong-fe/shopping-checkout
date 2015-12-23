@@ -12,11 +12,13 @@ const parseSheet = require( '../../parseSheet' );
  * 第二个参数则是根据此行数据生成好的 html
  * @param sheet
  * @param {Function} onRendered(rowData:*,html:String)
+ * @param [locals] - 要附加在 rowData 上的通用数据
  */
-module.exports = ( sheet , onRendered )=> {
+module.exports = ( sheet , onRendered , locals )=> {
   const templatePath = pathResolve( __dirname , 'template.html' );
 
   parseSheet( sheet , ( rowData )=> {
+    Object.assign( rowData , locals );
     cons.dot( templatePath , rowData )
       .then( ( html )=> {
         onRendered( rowData , html );

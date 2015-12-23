@@ -301,7 +301,7 @@
 
                           <div class="item-view-left-col-inner">
                             <a class="a-link-normal" href="#">
-                              <img src="pictures/{{=item['图片文件名']}}" class="yo-critical-feature" height="73" width="90">
+                              <img src="{{= it.picturesDir + item['图片文件名'] }}" class="yo-critical-feature" height="73" width="90">
                             </a>
                             {{? item['数量'] > 1}}
                             <span class="item-view-qty">

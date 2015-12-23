@@ -7,7 +7,7 @@
     "node": "^4.0.0"
   },
   "scripts": {
-    "render": "cd ./examples && node ../bin/cli"
+    "render": "node ./bin/cli -c ./examples"
   },
   "files": [
     "bin",

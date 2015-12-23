@@ -10,11 +10,13 @@ program
   .version( pkg.version )
   .option( '-c, --cwd [cwd]' , '工作目录，默认为当前程序运行的目录' )
   .option( '-f, --filename [filename]' , '模板文件夹下存放模板数据的 xlsx 文件的名字，默认为 data.xlsx' )
+  .option( '-p, --pictures-dir [pictures-dir]' , '一个相对于 data.xlsx 的存放图片的文件夹的相对路径，默认为 ../pictures/，' )
   .parse( process.argv );
 
 checkout( {
   cwd : program.cwd ,
-  xlsxName : program.filename
+  xlsxName : program.filename ,
+  pictures : program.picturesDir
 } );
 
 // todo 在输入不支持的 options 时会报错，阻止这个默认行为

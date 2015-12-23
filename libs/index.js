@@ -12,16 +12,20 @@ function main( options ) {
   if ( !options ) {
     options = {};
   }
-  if ( !options.cwd ) {
-    options.cwd = process.cwd();
-  }
-  if ( !options.xlsxName ) {
-    options.xlsxName = 'data.xlsx';
+
+  let workDir = options.cwd ,
+    xlsxFilename = options.xlsxName || 'data.xlsx' ,
+    picturesDir = options.picturesDir || '../pictures/';
+
+  if ( workDir ) {
+    workDir = pathResolve( workDir );
+  } else {
+    workDir = process.cwd()
   }
 
-  const xlsxFilename = options.xlsxName;
-
-  const workDir = options.cwd; // 当前工作目录
+  if ( !picturesDir.endsWith( '/' ) ) {
+    picturesDir += '/';
+  }
 
   // 记录运行数据
   let templateCount = 0 , // 寻找到了多少个模板
@@ -73,13 +77,14 @@ function main( options ) {
       const renderFunc = require( './templates/' + templateName + '/index.js' );
       renderFunc( firstSheet , function onRendered( rowData , html ) {
         const destPath = pathResolve( workDir , templateName + '/' + rowData[ '分单号' ] + '.html' );
-
         return fsp
           .writeFile( destPath , html )
           .then( ()=> {
             htmlCount += 1;
             log( '生成文件：' , destPath );
           } );
+      } , {
+        picturesDir
       } );
     }
   } , ( err )=> {

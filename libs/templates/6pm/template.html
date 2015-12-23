@@ -105,7 +105,7 @@
                 {{~it.items :item:index}}
                 <tr>
                   <td class="desc">
-                    <a class="prodImg" href="#"><img src="pictures/{{=item['图片文件名']}}"></a>
+                    <a class="prodImg" href="#"><img src="{{= it.picturesDir + item['图片文件名'] }}"></a>
                     <h4><a class="name" href="#">
 
                       {{=item['品名']}}
