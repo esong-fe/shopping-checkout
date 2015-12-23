@@ -1,6 +1,6 @@
 {
   "name": "shopping-checkout",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "根据数据生成购物网站的结算页面",
   "preferGlobal": true,
   "engines": {
