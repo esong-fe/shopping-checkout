@@ -23,6 +23,7 @@
     "dot": "^1.0.3",
     "fs-extra": "^0.26.3",
     "fs-promise": "^0.3.1",
+    "glob": "^6.0.1",
     "xlsx": "^0.8.0"
   },
   "repository": {
