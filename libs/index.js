@@ -8,10 +8,15 @@ const glob = require( 'glob' ) ,
 
 const renderer = require( './renderer' );
 
-const packageDir = pathResolve( __dirname , '../' ); // 此 npm 包在本地系统的路径，用于定位模板位置
-
 exports = module.exports = main;
 
+/**
+ * 根据模板数据生成模板
+ * @param {Object} [options]
+ * @param {Object} [options.cwd] - 工作目录，默认为 process.cwd()
+ * @param {Object} [options.xlsxName='data.xlsx'] - 模板文件夹下保存模板数据的文件名
+ * @param {Object} [options.picturesDir='../pictures/'] - 图片文件夹位置，相对于 data.xlsx
+ */
 function main( options ) {
   if ( !options ) {
     options = {};
@@ -24,7 +29,7 @@ function main( options ) {
   if ( workDir ) {
     workDir = pathResolve( workDir );
   } else {
-    workDir = process.cwd()
+    workDir = process.cwd();
   }
 
   if ( !picturesDir.endsWith( '/' ) ) {
@@ -63,7 +68,7 @@ function main( options ) {
 
     // 复制模板所需的静态文件
     fsp.copy(
-      pathResolve( packageDir , './libs/templates/' + templateName + '/resources' ) ,
+      pathResolve( __dirname , './templates/' + templateName + '/resources' ) ,
       pathResolve( workDir , './' + templateName + '/resources' )
     );
 
