@@ -22,14 +22,9 @@ function main( options ) {
     picturesDir = options.picturesDir || '../pictures/';
 
   if ( workDir ) {
-    try {
-      process.chdir( workDir );
-    }
-    catch ( e ) {
-      console.error( '切换到工作目录时出错：' , e );
-      console.error( '请检查路径 %s 是否存在。' , pathResolve( workDir ) );
-      return;
-    }
+    workDir = pathResolve( workDir );
+  } else {
+    workDir = process.cwd()
   }
 
   if ( !picturesDir.endsWith( '/' ) ) {
@@ -40,12 +35,14 @@ function main( options ) {
   let templateCount = 0 , // 寻找到了多少个模板
     htmlCount = 0; // 一共生成了多少个 html 文件
 
-  log( '\n正在 %s 里寻找是否有匹配的模板……' , process.cwd() );
+  log( '\n正在 %s 里寻找是否有匹配的模板……' , workDir );
 
   templates()
     .then( files => {
       const globPattern = '{' + files.join( ',' ) + '}/' + xlsxFilename;
-      glob( globPattern , function ( err , dataXLSXFiles ) {
+      glob( globPattern , {
+        cwd : workDir
+      } , function ( err , dataXLSXFiles ) {
         if ( err ) {
           console.dir( '查找文件时出错：' , err );
           return;
@@ -67,16 +64,16 @@ function main( options ) {
     // 复制模板所需的静态文件
     fsp.copy(
       pathResolve( packageDir , './libs/templates/' + templateName + '/resources' ) ,
-      templateName + '/resources'
+      pathResolve( workDir , './' + templateName + '/resources' )
     );
 
     // 读取电子表格的第一张表
     let wb;
     try {
-      wb = parseXLSX( fileRelativePath );
+      wb = parseXLSX( pathResolve( workDir , fileRelativePath ) );
     }
     catch ( e ) {
-      console.error( '解析 %s 文件时出错：' , fileRelativePath );
+      console.error( '解析 %s 文件时出错：' , pathResolve( workDir , fileRelativePath ) );
       console.error( e );
       console.error( '请检查文件格式是否正确。' );
     }
@@ -85,7 +82,7 @@ function main( options ) {
     renderer( firstSheet , templateName , {
       locals : { picturesDir } ,
       onRendered : function ( rowData , html ) {
-        const destPath = templateName + '/' + rowData[ '分单号' ] + '.html';
+        const destPath = pathResolve( workDir , templateName + '/' + rowData[ '分单号' ] + '.html' );
         return fsp
           .writeFile( destPath , html )
           .then( ()=> {
