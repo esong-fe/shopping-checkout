@@ -4,8 +4,6 @@ const pathResolve = require( 'path' ).resolve;
 const cons = require( 'consolidate' );
 const parseSheet = require( './parseSheet' );
 
-const dateFields = [ '发货日期' , '下单日期' ];
-
 /**
  * @param sheet
  * @param {String} templateName - 模板名称
@@ -17,13 +15,26 @@ module.exports = ( sheet , templateName , options )=> {
   const templatePath = pathResolve( __dirname , 'templates/' + templateName + '/template.html' );
   parseSheet( sheet , ( rowData )=> {
 
-    if ( templateName === '6pm' ) {
-      dateFields.forEach( ( key )=> {
-        const m = moment( new Date( rowData[ key ] ) );
-        if ( m.isValid() ) {
-          rowData[ key ] = m.format( 'MMM D,YYYY [at] h:mm A' );
+    switch ( templateName ) {
+      case '6pm':
+        [ '发货日期' , '下单日期' ].forEach( ( key )=> {
+          const m = moment( new Date( rowData[ key ] ) );
+          if ( m.isValid() ) {
+            rowData[ key ] = m.format( 'MMM D,YYYY [at] h:mm A' );
+          }
+        } );
+        break;
+
+      case 'amazon-us':
+        const m1 = moment( new Date( rowData[ '下单日期' ] ) );
+        if ( m1.isValid() ) {
+          rowData[ '下单日期' ] = m1.format( 'MMMM D, YYYY' );
         }
-      } );
+        const m2 = moment( new Date( rowData[ '发货日期' ] ) );
+        if ( m2.isValid() ) {
+          rowData[ '发货日期' ] = m2.format( 'MMM D, YYYY' );
+        }
+        break;
     }
 
     Object.assign( rowData , options.locals );
