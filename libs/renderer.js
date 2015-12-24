@@ -1,7 +1,10 @@
 'use strict';
+const moment = require( 'moment' );
 const pathResolve = require( 'path' ).resolve;
 const cons = require( 'consolidate' );
 const parseSheet = require( './parseSheet' );
+
+const dateFields = [ '发货日期' , '下单日期' ];
 
 /**
  * @param sheet
@@ -13,6 +16,16 @@ const parseSheet = require( './parseSheet' );
 module.exports = ( sheet , templateName , options )=> {
   const templatePath = pathResolve( __dirname , 'templates/' + templateName + '/template.html' );
   parseSheet( sheet , ( rowData )=> {
+
+    if ( templateName === '6pm' ) {
+      dateFields.forEach( ( key )=> {
+        const m = moment( new Date( rowData[ key ] ) );
+        if ( m.isValid() ) {
+          rowData[ key ] = m.format( 'MMM D,YYYY [at] h:mm A' );
+        }
+      } );
+    }
+
     Object.assign( rowData , options.locals );
     cons.dot( templatePath , rowData )
       .then( ( html )=> {
@@ -20,3 +33,8 @@ module.exports = ( sheet , templateName , options )=> {
       } );
   } );
 };
+
+/**
+ * 将日期转换成某一形式
+ */
+function covertDate( date ) {}
