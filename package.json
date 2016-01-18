@@ -21,6 +21,7 @@
     "commander": "^2.9.0",
     "consolidate": "^0.13.1",
     "dot": "^1.0.3",
+    "translate.js": "^0.3.0",
     "fs-extra": "^0.26.3",
     "fs-promise": "^0.3.1",
     "glob": "^6.0.1",

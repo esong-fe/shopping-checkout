@@ -1,4 +1,14 @@
 'use strict';
+const Translate = require( 'translation.js' );
+const t = new Translate();
+// todo 有道翻译不能指定目标语种，但用谷歌翻译会出错
+//t.create( 'GoogleCN' );
+//t.defaultApi = 'GoogleCN';
+t.create( 'YouDao' , {
+  apiKey : '995586483' ,
+  keyFrom : 'yi-express'
+} );
+t.defaultApi = 'YouDao';
 
 /**
  * 对 Excel 内的一行数据做一些改变
@@ -52,6 +62,38 @@ class Transform {
     } , 0 ).toFixed( 2 );
     return Promise.resolve();
   }
+
+  /**
+   * 翻译指定字段
+   * @returns {Promise}
+   */
+  translate() {
+    const data = this.data;
+    const translateTo = { '英语' : 'en' , '日语' : 'ja' }[ data[ '翻译为' ] ];
+    if ( !translateTo ) {
+      return Promise.resolve();
+    }
+
+    const translateItemKeys = [ '品名' ];
+    const promises = [];
+    data.items.forEach( ( item )=> {
+      translateItemKeys.forEach( ( key )=> {
+        const p = t
+          .translate( {
+            text : item[ key ] ,
+            to : translateTo
+          } )
+          .then( ( resultObj )=> {
+            item[ key ] = resultObj.result;
+          } , ( error )=> {
+            console.error( '翻译分单号 %s 里的 "%s" 为%s时出错：%s' , data[ '分单号' ] , item[ key ] , data[ '翻译为' ] , error );
+          } );
+
+        promises.push( p );
+      } );
+    } );
+    return Promise.all( promises );
+  }
 }
 
 /**
@@ -63,6 +105,7 @@ module.exports = ( data )=> {
   const t = new Transform( data );
   return Promise.all( [
     t.cardType() ,
-    t.totalAmount()
+    t.totalAmount() ,
+    t.translate()
   ] ).then( ()=> t.data );
 };
