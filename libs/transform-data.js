@@ -2,13 +2,13 @@
 const Translate = require( 'translation.js' );
 const t = new Translate();
 // todo 有道翻译不能指定目标语种，但用谷歌翻译会出错
-//t.create( 'GoogleCN' );
-//t.defaultApi = 'GoogleCN';
-t.create( 'YouDao' , {
-  apiKey : '995586483' ,
-  keyFrom : 'yi-express'
-} );
-t.defaultApi = 'YouDao';
+t.create( 'GoogleCN' );
+t.defaultApi = 'GoogleCN';
+//t.create( 'YouDao' , {
+//  apiKey : '995586483' ,
+//  keyFrom : 'yi-express'
+//} );
+//t.defaultApi = 'YouDao';
 
 /**
  * 对 Excel 内的一行数据做一些改变
@@ -84,7 +84,7 @@ class Transform {
             to : translateTo
           } )
           .then( ( resultObj )=> {
-            item[ key ] = resultObj.result;
+            item[ key ] = resultObj.result.join( ' ' );
           } , ( error )=> {
             console.error( '翻译分单号 %s 里的 "%s" 为%s时出错：%s' , data[ '分单号' ] , item[ key ] , data[ '翻译为' ] , error );
           } );
