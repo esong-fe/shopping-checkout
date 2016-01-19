@@ -1,51 +1,45 @@
 'use strict';
-const moment = require( 'moment' );
 const pathResolve = require( 'path' ).resolve;
 const cons = require( 'consolidate' );
 const parseSheet = require( './parseSheet' );
+const transformData = require( './transform-data' );
+const parseXLSX = require( 'xlsx' ).readFile;
 
 /**
- * @param sheet
+ * @param {String} sheetPath - Excel 表格的绝对路径
  * @param {String} templateName - 模板名称
  * @param {Object} [options]
  * @param {Object} [options.locals] - 要附加在 rowData 上的通用数据
  * @param {Function} [options.onRendered(rowData:*,html:String)] - 没当一个模板生成好了之后就会调用此函数
  */
-module.exports = ( sheet , templateName , options )=> {
-  const templatePath = pathResolve( __dirname , 'templates/' + templateName + '/template.html' );
+module.exports = ( sheetPath , templateName , options )=> {
+  // 读取电子表格的第一张表
+  let wb;
+  try {
+    wb = parseXLSX( sheetPath );
+  }
+  catch ( e ) {
+    console.error( '解析 %s 文件时出错：' , sheetPath );
+    console.error( e );
+    console.error( '请检查文件格式是否正确。' );
+  }
+  const sheet = wb.Sheets[ wb.SheetNames[ 0 ] ];
+
+  // 解析表格数据，每解析一行调用一次回调函数
   parseSheet( sheet , ( rowData )=> {
-
-    switch ( templateName ) {
-      case '6pm':
-        [ '发货日期' , '下单日期' ].forEach( ( key )=> {
-          const m = moment( new Date( rowData[ key ] ) );
-          if ( m.isValid() ) {
-            rowData[ key ] = m.format( 'MMM D,YYYY [at] h:mm A' );
-          }
-        } );
-        break;
-
-      case 'amazon-us':
-        const m1 = moment( new Date( rowData[ '下单日期' ] ) );
-        if ( m1.isValid() ) {
-          rowData[ '下单日期' ] = m1.format( 'MMMM D, YYYY' );
-        }
-        const m2 = moment( new Date( rowData[ '发货日期' ] ) );
-        if ( m2.isValid() ) {
-          rowData[ '发货日期' ] = m2.format( 'MMM D, YYYY' );
-        }
-        break;
-    }
-
     Object.assign( rowData , options.locals );
-    cons.dot( templatePath , rowData )
-      .then( ( html )=> {
-        options.onRendered( rowData , html );
+    rowData.templateName = templateName;
+
+    // 修改或添加表格数据
+    transformData( rowData , {
+      useCN : options.useCN
+    } )
+      .then( ( data )=> {
+        cons
+          .dot( pathResolve( __dirname , 'templates/' + templateName + '/template.html' ) , data )
+          .then( ( html )=> {
+            options.onRendered( data , html );
+          } );
       } );
   } );
 };
-
-/**
- * 将日期转换成某一形式
- */
-function covertDate( date ) {}

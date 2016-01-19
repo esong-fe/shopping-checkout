@@ -1,6 +1,5 @@
 'use strict';
 const sheetToJson = require( 'xlsx' ).utils.sheet_to_json;
-const transformData = require( './transform-data' );
 
 /**
  * 保存属于商品的字段
@@ -35,7 +34,7 @@ module.exports = function ( sheet , onData ) {
 
       // 遇到一个新的分单号，则说明上一条分单号解析完成了，调用一次事件
       if ( prevRowData ) {
-        parseData( prevRowData );
+        onData( prevRowData );
       }
 
       prevRowData = rowData;
@@ -45,9 +44,5 @@ module.exports = function ( sheet , onData ) {
       prevRowData.items.push( itemData );
     }
   } );
-  parseData( prevRowData ); // 最后一条分单数据
-
-  function parseData( rowData ) {
-    transformData( rowData ).then( onData );
-  }
+  onData( prevRowData ); // 最后一条分单数据
 };

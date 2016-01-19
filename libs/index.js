@@ -3,8 +3,7 @@ const glob = require( 'glob' ) ,
   fsp = require( 'fs-promise' ) ,
   path = require( 'path' ) ,
   pathResolve = path.resolve ,
-  pathDir = path.dirname ,
-  parseXLSX = require( 'xlsx' ).readFile;
+  pathDir = path.dirname;
 
 const renderer = require( './renderer' );
 
@@ -16,6 +15,7 @@ exports = module.exports = main;
  * @param {Object} [options.cwd] - 工作目录，默认为 process.cwd()
  * @param {Object} [options.xlsxName='data.xlsx'] - 模板文件夹下保存模板数据的文件名
  * @param {Object} [options.picturesDir='../pictures/'] - 图片文件夹位置，相对于 data.xlsx
+ * @param {Boolean} [options.useCN] - 默认使用国外的谷歌翻译，指定此参数则使用国内的谷歌翻译
  */
 function main( options ) {
   if ( !options ) {
@@ -60,6 +60,10 @@ function main( options ) {
     log( '\n运行完毕，此次运行发现了 %s 个模板文件夹，共生成 %s 个 html 文件。' , templateCount , htmlCount );
   } );
 
+  /**
+   * 每一个 Excel 文件的处理函数
+   * @param fileRelativePath
+   */
   function handle( fileRelativePath ) {
     const templateName = pathDir( fileRelativePath );
 
@@ -72,19 +76,8 @@ function main( options ) {
       pathResolve( workDir , './' + templateName + '/resources' )
     );
 
-    // 读取电子表格的第一张表
-    let wb;
-    try {
-      wb = parseXLSX( pathResolve( workDir , fileRelativePath ) );
-    }
-    catch ( e ) {
-      console.error( '解析 %s 文件时出错：' , pathResolve( workDir , fileRelativePath ) );
-      console.error( e );
-      console.error( '请检查文件格式是否正确。' );
-    }
-    const firstSheet = wb.Sheets[ wb.SheetNames[ 0 ] ];
-
-    renderer( firstSheet , templateName , {
+    renderer( pathResolve( workDir , fileRelativePath ) , templateName , {
+      useCN : options.useCN ,
       locals : { picturesDir } ,
       onRendered : function ( rowData , html ) {
         const destPath = pathResolve( workDir , templateName + '/' + rowData[ '分单号' ] + '.html' );

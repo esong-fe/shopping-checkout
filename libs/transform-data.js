@@ -1,9 +1,8 @@
 'use strict';
-const Translate = require( 'translation.js' );
-const t = new Translate();
-// todo 有道翻译不能指定目标语种，但用谷歌翻译会出错
+const moment = require( 'moment' );
+const t = new (require( 'translation.js' ))();
+t.create( 'Google' );
 t.create( 'GoogleCN' );
-t.defaultApi = 'GoogleCN';
 //t.create( 'YouDao' , {
 //  apiKey : '995586483' ,
 //  keyFrom : 'yi-express'
@@ -23,8 +22,16 @@ const supportCardType = {
 };
 
 class Transform {
-  constructor( data ) {
+
+  /**
+   * 数据转换的构造函数
+   * @param data
+   * @param options
+   * @param options.useCN - 翻译时默认使用国外的谷歌翻译，但如果此参数为 true 则使用国内的谷歌翻译
+   */
+  constructor( data , options ) {
     this.data = data;
+    this.useCN = options.useCN;
   }
 
   /**
@@ -64,6 +71,35 @@ class Transform {
   }
 
   /**
+   * 转换日期格式
+   */
+  convertDate() {
+    const rowData = this.data;
+    switch ( rowData.templateName ) {
+      case '6pm':
+        [ '发货日期' , '下单日期' ].forEach( ( key )=> {
+          const m = moment( new Date( rowData[ key ] ) );
+          if ( m.isValid() ) {
+            rowData[ key ] = m.format( 'MMM D,YYYY [at] h:mm A' );
+          }
+        } );
+        break;
+
+      case 'amazon-us':
+        const m1 = moment( new Date( rowData[ '下单日期' ] ) );
+        if ( m1.isValid() ) {
+          rowData[ '下单日期' ] = m1.format( 'MMMM D, YYYY' );
+        }
+        const m2 = moment( new Date( rowData[ '发货日期' ] ) );
+        if ( m2.isValid() ) {
+          rowData[ '发货日期' ] = m2.format( 'MMM D, YYYY' );
+        }
+        break;
+    }
+    return Promise.resolve();
+  }
+
+  /**
    * 翻译指定字段
    * @returns {Promise}
    */
@@ -80,6 +116,7 @@ class Transform {
       translateItemKeys.forEach( ( key )=> {
         const p = t
           .translate( {
+            api : this.useCN ? 'GoogleCN' : 'Google' ,
             text : item[ key ] ,
             to : translateTo
           } )
@@ -99,13 +136,15 @@ class Transform {
 /**
  * 处理数据并返回处理结果
  * @param data
+ * @param options - 构造函数的 options 对象
  * @returns {Promise}
  */
-module.exports = ( data )=> {
-  const t = new Transform( data );
+module.exports = ( data , options )=> {
+  const t = new Transform( data , options );
   return Promise.all( [
     t.cardType() ,
     t.totalAmount() ,
-    t.translate()
+    t.translate() ,
+    t.convertDate()
   ] ).then( ()=> t.data );
 };

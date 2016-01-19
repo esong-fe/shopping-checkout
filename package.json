@@ -1,13 +1,13 @@
 {
   "name": "shopping-checkout",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "根据数据生成购物网站的结算页面",
   "preferGlobal": true,
   "engines": {
     "node": "^4.0.0"
   },
   "scripts": {
-    "render": "node ./bin/cli -c ./examples"
+    "render": "node ./bin/cli -c ./examples -z"
   },
   "files": [
     "bin",
