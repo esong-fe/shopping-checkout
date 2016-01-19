@@ -3,11 +3,13 @@ const glob = require( 'glob' ) ,
   fsp = require( 'fs-promise' ) ,
   path = require( 'path' ) ,
   pathResolve = path.resolve ,
-  pathDir = path.dirname;
+  cons = require( 'consolidate' ) ,
+  pathDir = path.dirname ,
+  templatesDirPath = pathResolve( __dirname , '../templates' );
 
 const renderer = require( './renderer' );
 
-exports = module.exports = main;
+module.exports = main;
 
 /**
  * 根据模板数据生成模板
@@ -72,17 +74,19 @@ function main( options ) {
 
     // 复制模板所需的静态文件
     fsp.copy(
-      pathResolve( __dirname , './templates/' + templateName + '/resources' ) ,
-      pathResolve( workDir , './' + templateName + '/resources' )
+      pathResolve( templatesDirPath , templateName , './resources' ) ,
+      pathResolve( workDir , templateName , 'resources' )
     );
 
     renderer( pathResolve( workDir , fileRelativePath ) , templateName , {
       useCN : options.useCN ,
       locals : { picturesDir } ,
-      onRendered : function ( rowData , html ) {
-        const destPath = pathResolve( workDir , templateName + '/' + rowData[ '分单号' ] + '.html' );
-        return fsp
-          .writeFile( destPath , html )
+      onParsed : function ( data ) {
+        const destPath = pathResolve( workDir , templateName + '/' + data[ '分单号' ] + '.html' );
+
+        cons
+          .dot( pathResolve( templatesDirPath , templateName , 'template.html' ) , data )
+          .then( ( html )=> fsp.writeFile( destPath , html ) )
           .then( ()=> {
             htmlCount += 1;
             log( '生成文件：' , destPath );
@@ -102,5 +106,5 @@ function main( options ) {
  * @return {Promise}
  */
 function templates() {
-  return fsp.readdir( pathResolve( __dirname , './templates' ) );
+  return fsp.readdir( templatesDirPath );
 }

@@ -1,7 +1,5 @@
 'use strict';
-const pathResolve = require( 'path' ).resolve;
-const cons = require( 'consolidate' );
-const parseSheet = require( './parseSheet' );
+const parseSheetPerLine = require( './parseSheet' );
 const transformData = require( './transform-data' );
 const parseXLSX = require( 'xlsx' ).readFile;
 
@@ -26,20 +24,13 @@ module.exports = ( sheetPath , templateName , options )=> {
   const sheet = wb.Sheets[ wb.SheetNames[ 0 ] ];
 
   // 解析表格数据，每解析一行调用一次回调函数
-  parseSheet( sheet , ( rowData )=> {
+  parseSheetPerLine( sheet , ( rowData )=> {
     Object.assign( rowData , options.locals );
     rowData.templateName = templateName;
 
     // 修改或添加表格数据
     transformData( rowData , {
       useCN : options.useCN
-    } )
-      .then( ( data )=> {
-        cons
-          .dot( pathResolve( __dirname , 'templates/' + templateName + '/template.html' ) , data )
-          .then( ( html )=> {
-            options.onRendered( data , html );
-          } );
-      } );
+    } ).then( options.onParsed );
   } );
 };
