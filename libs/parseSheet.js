@@ -14,6 +14,8 @@ const itemKey = [ '图片文件名' , '品名' , '单价' , '数量' , '品牌' 
  */
 module.exports = function ( sheet , onData ) {
   const array = sheetToJson( sheet );
+  let hitFirstData = false;
+  let defaultSheetLang;
 
   // 同一个分单号下可能会有多个物品，所以要更改一下数据结构
   let prevRowData;
@@ -25,6 +27,14 @@ module.exports = function ( sheet , onData ) {
 
     // 如果这行数据有分单号
     if ( rowData[ '分单号' ] ) {
+
+      // 整张表格都使用第一个分单号的“翻译为”语种
+      if ( !hitFirstData ) {
+        hitFirstData = true;
+        defaultSheetLang = rowData[ '翻译为' ];
+      } else if ( defaultSheetLang && !rowData[ '翻译为' ] ) {
+        rowData[ '翻译为' ] = defaultSheetLang;
+      }
 
       // 先将物品相关的数据转换成一个数组
       rowData.items = [ itemData ];
