@@ -100,6 +100,17 @@ class Transform {
   }
 
   /**
+   * 如果是亚马逊，则根据“翻译为”字段判断货币符号
+   */
+  currency() {
+    const rowData = this.data;
+    if ( 'amazon-us' === rowData.templateName ) {
+      rowData.currency = rowData[ '翻译为' ] === '日语' ? '￥' : '$';
+    }
+    return Promise.resolve();
+  }
+
+  /**
    * 翻译指定字段
    * @returns {Promise}
    */
@@ -145,6 +156,7 @@ module.exports = ( data , options )=> {
     t.cardType() ,
     t.totalAmount() ,
     t.translate() ,
+    t.currency() ,
     t.convertDate()
   ] ).then( ()=> t.data );
 };
