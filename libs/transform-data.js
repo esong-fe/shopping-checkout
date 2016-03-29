@@ -88,6 +88,7 @@ class Transform {
       case 'amazon-us':
       case 'amazon-us2':
       case 'amazon-jp':
+      case 'amazon-jp2':
         const m1 = moment( new Date( rowData[ '下单日期' ] ) );
         if ( m1.isValid() ) {
           rowData[ '下单日期' ] = m1.format( 'MMMM D, YYYY' );
@@ -106,7 +107,7 @@ class Transform {
    */
   currency() {
     const rowData = this.data;
-    if ( 'amazon-us' === rowData.templateName || 'amazon-jp' === rowData.templateName || 'amazon-us2' === rowData.templateName ) {
+    if ( 'amazon-us' === rowData.templateName || 'amazon-jp' === rowData.templateName || 'amazon-us2' === rowData.templateName || 'amazon-jp2' === rowData.templateName ) {
       rowData.currency = rowData[ '翻译为' ] === '日语' ? '￥' : '$';
     }
     return Promise.resolve();
